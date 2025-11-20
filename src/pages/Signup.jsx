@@ -7,6 +7,12 @@ import ReCAPTCHA from "react-google-recaptcha";
 const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
 const isCaptchaConfigured = Boolean(RECAPTCHA_SITE_KEY);
 
+if (isCaptchaConfigured) {
+  console.info('reCAPTCHA site key loaded:', RECAPTCHA_SITE_KEY);
+} else {
+  console.warn('reCAPTCHA site key missing. Set VITE_RECAPTCHA_SITE_KEY.');
+}
+
 const Signup = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
