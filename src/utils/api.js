@@ -1,6 +1,13 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const DEFAULT_API_URL = 'https://spendwise-backend-xwsx.onrender.com/api';
+
+const sanitizeBaseUrl = (value) => {
+  if (!value) return DEFAULT_API_URL;
+  return value.endsWith('/') ? value.slice(0, -1) : value;
+};
+
+const API_URL = sanitizeBaseUrl(import.meta.env.VITE_API_URL || DEFAULT_API_URL);
 
 const api = axios.create({
   baseURL: API_URL,
@@ -38,8 +45,7 @@ export const authAPI = {
   login: (data) => api.post('/auth/login', data),
   logout: () => api.post('/auth/logout'),
   googleAuth: () => {
-    window.location.href =
-      `${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/auth/google`;
+    window.location.href = `${API_URL}/auth/google`;
   },
 };
 

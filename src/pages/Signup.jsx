@@ -4,6 +4,9 @@ import { useAuth } from '../context/AuthContext';
 import { authAPI } from '../utils/api';
 import ReCAPTCHA from "react-google-recaptcha";
 
+const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
+const isCaptchaConfigured = Boolean(RECAPTCHA_SITE_KEY);
+
 const Signup = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -101,11 +104,17 @@ const Signup = () => {
           </div>
 
           <div className="flex justify-center">
-            <ReCAPTCHA
-              sitekey="6Ld50BIsAAAAAKRWurkgL9FEAYdBMIWXEuBHMCQM"
-              onChange={(token) => setCaptchaToken(token)}
-              theme="dark"
-            />
+            {isCaptchaConfigured ? (
+              <ReCAPTCHA
+                sitekey={RECAPTCHA_SITE_KEY}
+                onChange={(token) => setCaptchaToken(token)}
+                theme="dark"
+              />
+            ) : (
+              <p className="text-sm text-red-400">
+                Configure `VITE_RECAPTCHA_SITE_KEY` to enable signup.
+              </p>
+            )}
           </div>
 
           <button

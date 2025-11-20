@@ -12,7 +12,13 @@ npm install
 ```
 
 ## Environment (.env)
-VITE_API_BASE_URL=http://localhost:8000
+```
+# API defaults to Render deployment when unset
+VITE_API_URL=https://spendwise-backend-xwsx.onrender.com/api
+
+# Required for Google reCAPTCHA on signup (must match your domain)
+VITE_RECAPTCHA_SITE_KEY=your-recaptcha-site-key
+```
 
 ## Run (development)
 ```bash
@@ -42,7 +48,7 @@ npm run build
 
 ## Notes
 - Keep sensitive keys out of client code
-- Use VITE_API_BASE_URL to point to backend
+- Use `VITE_API_URL`/`VITE_RECAPTCHA_SITE_KEY` to switch between local and production configs
 ```// filepath: c:\Users\komal\OneDrive\Desktop\Hushh\frontend\README.md
 # Frontend — Hushh (React + Vite)
 
