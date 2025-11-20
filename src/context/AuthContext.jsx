@@ -29,13 +29,12 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  const signup = async (name, email, password, captchaToken) => {
+  const signup = async (name, email, password) => {
     try {
       const response = await authAPI.signup({
         name,
         email,
-        password,
-        captchaToken
+        password
       });
 
       const { user: userData, token } = response.data;
@@ -88,8 +87,7 @@ export const AuthProvider = ({ children }) => {
   const value = {
     user,
     loading,
-    signup: (name, email, password, captchaToken) =>
-      signup(name, email, password, captchaToken),
+    signup,
     login,
     logout,
     updateUser,

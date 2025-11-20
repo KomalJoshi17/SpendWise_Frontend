@@ -57,29 +57,6 @@ const Layout = ({ children }) => {
 };
 
 function App() {
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get('token');
-    const googleAuth = urlParams.get('googleAuth');
-    const userParam = urlParams.get('user');
-    
-    if (token && googleAuth === 'true') {
-      localStorage.setItem('token', token);
-      
-      if (userParam) {
-        try {
-          const userData = JSON.parse(decodeURIComponent(userParam));
-          localStorage.setItem('user', JSON.stringify(userData));
-        } catch (error) {
-          console.error('Error parsing user data:', error);
-        }
-      }
-      
-      window.history.replaceState({}, document.title, '/');
-      window.location.href = '/'; 
-    }
-  }, []);
-
   return (
     <DarkModeProvider>
       <AuthProvider>
